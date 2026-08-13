@@ -431,6 +431,7 @@ const notifications: Notification[] = [
 
 // ============ البانرات ============
 const banners: Banner[] = [
+  { id: "bn-medo-main", title: "متجر ميدو للبطاقات الرقمية", subtitle: "شحن شدات ببجي وجميع الخدمات الرقمية بأمان وسرعة فائقة", image: "/images/medo-hero-banner.png", buttonText: "تسوق الحين", buttonUrl: "/products", order: 0, active: true, createdAt: iso(-35 * DAY) },
   { id: "bn-1", title: "اشحن شدات ببجي بسرعة وأمان", subtitle: "أفضل خدمات PUBG الرقمية بأسعار تنافسية وتنفيذ سريع وخسومات حتى 40%", image: "/images/uc-660.svg", buttonText: "تسوق الآن", buttonUrl: "/products", order: 1, active: true, createdAt: iso(-30 * DAY) },
   { id: "bn-2", title: "خدمات السوشيال ميديا", subtitle: "متابعين ومشاهدات وإعجابات لكل المنصات بتسليم سريع وضمان تعويض", image: "/images/social-instagram.svg", buttonText: "اكتشف الخدمات", buttonUrl: "/services/social-media", order: 2, active: true, createdAt: iso(-25 * DAY) },
   { id: "bn-3", title: "بطولة الموسم بخصم 16%", subtitle: "اشحن Royale Pass بـ 960 UC وحقق أقصى جوائز الموسم", image: "/images/royale-pass.svg", buttonText: "اشتري دلوقتي", buttonUrl: "/products/pubg-royale-pass", order: 3, active: true, createdAt: iso(-20 * DAY) },
