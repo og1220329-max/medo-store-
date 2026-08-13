@@ -7,9 +7,6 @@ import {
   ShieldCheck,
   Headphones,
   Award,
-  ShoppingCart,
-  Flame,
-  ArrowLeft,
 } from "lucide-react";
 
 export function Hero() {
@@ -49,40 +46,32 @@ export function Hero() {
   ];
 
   return (
-    <section className="relative w-full bg-[#08090d] pt-4 pb-8 overflow-hidden">
+    <section className="relative w-full bg-[#08090d] pt-2 pb-6 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.15)_0%,_transparent_70%)]" />
+      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[500px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.18)_0%,_transparent_75%)]" />
 
-      <div className="relative mx-auto max-w-7xl px-4 md:px-6">
-        {/* Main Banner Image Container */}
+      <div className="relative mx-auto w-full max-w-[1600px] px-2 sm:px-4 md:px-6">
+        {/* Full Big Banner Container */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative group overflow-hidden rounded-2xl md:rounded-3xl border border-red-500/30 bg-[#0c0d14] shadow-[0_10px_50px_rgba(223,1,18,0.2)]"
+          transition={{ duration: 0.5 }}
+          className="relative group overflow-hidden rounded-2xl md:rounded-3xl border border-red-500/30 bg-[#0c0d14] shadow-[0_12px_60px_rgba(223,1,18,0.25)] hover:border-red-500/60 transition-colors duration-300"
         >
-          <Link href="/products" className="block relative w-full aspect-[21/9] min-h-[220px] sm:min-h-[300px] md:min-h-[420px] lg:min-h-[480px]">
+          <Link
+            href="/products"
+            className="block relative w-full aspect-[1024/473] overflow-hidden cursor-pointer"
+            title="متجر ميدو للبطاقات الرقمية - اضغط للتسوق"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/medo-hero-banner.png"
               alt="متجر ميدو للبطاقات الرقمية - تسوق الحين"
-              className="w-full h-full object-cover md:object-fill transition-transform duration-700 group-hover:scale-[1.015]"
+              className="w-full h-full object-cover sm:object-fill transition-transform duration-500 group-hover:scale-[1.01]"
+              priority-load="true"
             />
-            {/* Subtle glow / hover sheen */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08090d]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            
-            {/* Quick Action floating badge on mobile/desktop */}
-            <div className="absolute bottom-4 start-4 sm:bottom-6 sm:start-6 flex items-center gap-3 z-10">
-              <span className="inline-flex items-center gap-2 rounded-xl bg-[#DF0112] hover:bg-[#c20110] px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-black text-white shadow-xl shadow-red-950/80 transition transform group-hover:scale-105">
-                <ShoppingCart className="size-4" />
-                <span>تسوق الآن</span>
-                <ArrowLeft className="size-4" />
-              </span>
-              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/15 px-4 py-2.5 text-xs font-bold text-amber-400">
-                <Flame className="size-3.5 text-amber-400" />
-                <span>شحن فوري 24/7</span>
-              </span>
-            </div>
+            {/* Interactive Subtle Glow Overlay on Hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-red-950/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
           </Link>
         </motion.div>
 
@@ -90,17 +79,17 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-4 sm:mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
         >
           {features.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-[#10121a]/80 p-3.5 sm:p-4 backdrop-blur-sm transition-all duration-200 hover:border-red-500/30 hover:bg-[#151724]"
+                className="flex items-center gap-3 sm:gap-3.5 rounded-2xl border border-white/10 bg-[#10121a]/90 p-3 sm:p-4 backdrop-blur-sm transition-all duration-200 hover:border-red-500/30 hover:bg-[#151724]"
               >
-                <div className={`flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} border ${item.borderColor} ${item.textColor}`}>
+                <div className={`flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} border ${item.borderColor} ${item.textColor}`}>
                   <Icon className="size-5" />
                 </div>
                 <div className="flex flex-col min-w-0">
