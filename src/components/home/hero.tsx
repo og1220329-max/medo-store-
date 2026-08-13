@@ -78,14 +78,7 @@ export function Hero() {
           <Link
             href="/products"
             aria-label="تسوق الحين"
-            className="
-              absolute cursor-pointer select-none
-              rounded-xl
-              transition-all duration-200 ease-out
-              hover:brightness-125 hover:scale-[1.02] hover:shadow-[0_0_28px_rgba(223,1,18,0.65)]
-              active:scale-[0.97] active:brightness-110
-              focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff3a45] focus-visible:outline-offset-2
-            "
+            className="absolute cursor-pointer select-none outline-none bg-transparent"
             style={{
               left:   "50.3%",
               top:    "46.3%",
@@ -98,14 +91,7 @@ export function Hero() {
           <Link
             href="/products"
             aria-label="تسوق الآن"
-            className="
-              absolute cursor-pointer select-none
-              rounded-lg
-              transition-all duration-200 ease-out
-              hover:brightness-125 hover:scale-[1.02] hover:shadow-[0_0_22px_rgba(223,1,18,0.7)]
-              active:scale-[0.97] active:brightness-110
-              focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff3a45] focus-visible:outline-offset-2
-            "
+            className="absolute cursor-pointer select-none outline-none bg-transparent"
             style={{
               left:   "68.6%",
               top:    "60.4%",
@@ -118,14 +104,7 @@ export function Hero() {
           <Link
             href="/contact"
             aria-label="خدمة فورية 24/7"
-            className="
-              absolute cursor-pointer select-none
-              rounded-full
-              transition-all duration-200 ease-out
-              hover:brightness-115 hover:scale-[1.02]
-              active:scale-[0.97]
-              focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50 focus-visible:outline-offset-2
-            "
+            className="absolute cursor-pointer select-none outline-none bg-transparent"
             style={{
               left:   "49.8%",
               top:    "60.4%",
@@ -140,14 +119,7 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="تواصل معنا عبر واتساب"
-            className="
-              absolute cursor-pointer select-none
-              rounded-full
-              transition-all duration-200 ease-out
-              hover:brightness-110 hover:scale-[1.02]
-              active:scale-[0.97]
-              focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#25D366] focus-visible:outline-offset-2
-            "
+            className="absolute cursor-pointer select-none outline-none bg-transparent"
             style={{
               left:   "82%",
               top:    "82%",
