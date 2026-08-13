@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0d18"/>
+      <stop offset="55%" stop-color="#131730"/>
+      <stop offset="100%" stop-color="#0a0b12"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="rgba(139,92,246,0.5)"/>
+      <stop offset="100%" stop-color="rgba(139,92,246,0)"/>
+    </radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)" filter="url(#blur)" opacity="0.9"/>
+  <circle cx="650" cy="120" r="180" fill="#0ea5e9" opacity="0.14" filter="url(#blur)"/>
+  <circle cx="120" cy="480" r="180" fill="#22d3ee" opacity="0.1" filter="url(#blur)"/>
+  <g opacity="0.07" stroke="#8b5cf6" stroke-width="1">
+    <line x1="0" y1="42" x2="800" y2="42"/><line x1="0" y1="84" x2="800" y2="84"/><line x1="0" y1="126" x2="800" y2="126"/><line x1="0" y1="168" x2="800" y2="168"/><line x1="0" y1="210" x2="800" y2="210"/><line x1="0" y1="252" x2="800" y2="252"/><line x1="0" y1="294" x2="800" y2="294"/><line x1="0" y1="336" x2="800" y2="336"/><line x1="0" y1="378" x2="800" y2="378"/><line x1="0" y1="420" x2="800" y2="420"/><line x1="0" y1="462" x2="800" y2="462"/><line x1="0" y1="504" x2="800" y2="504"/><line x1="0" y1="546" x2="800" y2="546"/><line x1="0" y1="588" x2="800" y2="588"/>
+    <line x1="44" y1="0" x2="44" y2="600"/><line x1="88" y1="0" x2="88" y2="600"/><line x1="132" y1="0" x2="132" y2="600"/><line x1="176" y1="0" x2="176" y2="600"/><line x1="220" y1="0" x2="220" y2="600"/><line x1="264" y1="0" x2="264" y2="600"/><line x1="308" y1="0" x2="308" y2="600"/><line x1="352" y1="0" x2="352" y2="600"/><line x1="396" y1="0" x2="396" y2="600"/><line x1="440" y1="0" x2="440" y2="600"/><line x1="484" y1="0" x2="484" y2="600"/><line x1="528" y1="0" x2="528" y2="600"/><line x1="572" y1="0" x2="572" y2="600"/><line x1="616" y1="0" x2="616" y2="600"/><line x1="660" y1="0" x2="660" y2="600"/><line x1="704" y1="0" x2="704" y2="600"/><line x1="748" y1="0" x2="748" y2="600"/><line x1="792" y1="0" x2="792" y2="600"/>
+  </g>
+  
+  <g transform="translate(400 316) scale(1)">
+    <rect x="-230" y="-155" width="460" height="310" rx="36" fill="#151a35" stroke="rgba(139,92,246,0.55)" stroke-width="3"/>
+    <rect x="-218" y="-143" width="436" height="286" rx="28" fill="#0d1122"/>
+    <path d="M-218 60 L-218 143 L218 143 L218 60 Z" fill="url(#accent)" opacity="0.16"/>
+    
+  <text x="0" y="-92" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94a3b8" letter-spacing="4">يوتيوب</text>
+  <g transform="translate(0 -12)">
+    <rect x="-58" y="-34" width="116" height="72" rx="18" fill="none" stroke="#f87171" stroke-width="8"/>
+    <path d="M-18 -22 L26 2 L-18 26 Z" fill="#f87171"/>
+  </g>
+  <text x="0" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#a78bfa">5000 <tspan font-size="18" fill="#64748b">مشاهدة</tspan></text>
+
+  </g>
+  
+  <g transform="translate(400 92)">
+    <rect x="-120" y="-30" width="240" height="60" rx="18" fill="rgba(244,63,94,0.92)" transform="rotate(-4)"/>
+    <text x="0" y="6" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#ffffff">خصم 20%</text>
+    <text x="0" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#ffe4e6">خصم 20%</text>
+  </g>
+
+</svg>

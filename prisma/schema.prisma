@@ -1,0 +1,270 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          String   @id
+  name        String   @unique
+  description String?
+  permissions Json
+  isSystem    Boolean  @default(false)
+  createdAt   String
+  users       User[]
+}
+
+model User {
+  id             String        @id
+  name           String
+  email          String        @unique
+  phone          String?
+  passwordHash   String
+  role           String        @default("customer")
+  roleId         String?
+  roleRef        Role?         @relation(fields: [roleId], references: [id])
+  active         Boolean       @default(true)
+  resetTokenHash String?
+  resetExpiresAt String?
+  lastLoginAt    String?
+  createdAt      String
+  orders         Order[]
+  reviews        Review[]
+  tickets        Ticket[]
+  notifications  Notification[]
+}
+
+model Category {
+  id          String     @id
+  name        String
+  slug        String     @unique
+  description String?
+  image       String
+  icon        String     @default("Gamepad2")
+  parentId    String?
+  parent      Category?  @relation("CatTree", fields: [parentId], references: [id])
+  children    Category[] @relation("CatTree")
+  order       Int        @default(0)
+  active      Boolean    @default(true)
+  createdAt   String
+  products    Product[]
+}
+
+model Product {
+  id               String      @id
+  name             String
+  slug             String      @unique
+  sku              String?
+  description      String
+  shortDescription String?
+  categoryId       String
+  category         Category    @relation(fields: [categoryId], references: [id])
+  image            String
+  images           Json
+  price            Float
+  oldPrice         Float?
+  costPrice        Float?
+  stock            Int         @default(0)
+  unlimitedStock   Boolean     @default(false)
+  active           Boolean     @default(true)
+  featured         Boolean     @default(false)
+  bestSeller       Boolean     @default(false)
+  isNew            Boolean     @default(false)
+  deliveryTime     String
+  type             String      @default("digital")
+  features         Json
+  requiredFields   Json
+  rating           Float       @default(4.8)
+  reviewsCount     Int         @default(0)
+  badge            String?
+  createdAt        String
+  reviews          Review[]
+}
+
+model Order {
+  id            String      @id
+  number        String      @unique
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id])
+  name          String
+  phone         String
+  email         String?
+  notes         String?
+  subtotal      Float
+  discount      Float       @default(0)
+  total         Float
+  couponCode    String?
+  paymentMethod String
+  paymentStatus String      @default("pending")
+  reference     String?
+  paidAt        String?
+  status        String      @default("created")
+  timeline      Json
+  adminNotes    String?
+  createdAt     String
+  updatedAt     String
+  items         OrderItem[]
+  payments      Payment[]
+  review        Review?
+}
+
+model OrderItem {
+  id         String @id
+  orderId    String
+  order      Order  @relation(fields: [orderId], references: [id])
+  productId  String?
+  name       String
+  image      String?
+  price      Float
+  quantity   Int
+  customData Json
+}
+
+model Payment {
+  id        String @id
+  orderId   String
+  order     Order  @relation(fields: [orderId], references: [id])
+  method    String
+  status    String
+  amount    Float
+  reference String?
+  createdAt String
+  paidAt    String?
+}
+
+model Coupon {
+  id           String   @id
+  code         String   @unique
+  type         String
+  value        Float
+  minOrder     Float?
+  maxDiscount  Float?
+  startsAt     String?
+  expiresAt    String?
+  maxUses      Int      @default(0)
+  perUserLimit Int      @default(0)
+  active       Boolean  @default(true)
+  used         Int      @default(0)
+  createdAt    String
+}
+
+model Review {
+  id        String   @id
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  orderId   String?  @unique
+  order     Order?   @relation(fields: [orderId], references: [id])
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  name      String
+  rating    Int
+  comment   String
+  verified  Boolean  @default(false)
+  approved  Boolean  @default(false)
+  featured  Boolean  @default(false)
+  createdAt String
+}
+
+model SupportMessage {
+  id        String  @id
+  name      String
+  email     String
+  subject   String
+  message   String
+  read      Boolean @default(false)
+  createdAt String
+}
+
+model Ticket {
+  id          String          @id
+  number      String          @unique
+  userId      String?
+  user        User?           @relation(fields: [userId], references: [id])
+  name        String
+  email       String?
+  phone       String?
+  subject     String
+  orderNumber String?
+  status      String          @default("open")
+  createdAt   String
+  updatedAt   String
+  messages    TicketMessage[]
+}
+
+model TicketMessage {
+  id        String  @id
+  ticketId  String
+  ticket    Ticket  @relation(fields: [ticketId], references: [id])
+  fromAdmin Boolean @default(false)
+  message   String
+  createdAt String
+}
+
+model Notification {
+  id        String  @id
+  userId    String?
+  user      User?   @relation(fields: [userId], references: [id])
+  type      String
+  title     String
+  body      String?
+  link      String?
+  read      Boolean @default(false)
+  createdAt String
+}
+
+model Banner {
+  id         String  @id
+  title      String
+  subtitle   String?
+  image      String
+  buttonText String?
+  buttonUrl  String?
+  startsAt   String?
+  endsAt     String?
+  active     Boolean @default(true)
+  order      Int     @default(0)
+  createdAt  String
+}
+
+model HomepageSection {
+  key      String  @id
+  name     String
+  enabled  Boolean @default(true)
+  title    String?
+  subtitle String?
+  order    Int     @default(0)
+}
+
+model Offer {
+  id          String  @id
+  title       String
+  description String?
+  badge       String?
+  image       String?
+  discountPct Float?
+  productIds  Json
+  startsAt    String?
+  endsAt      String?
+  active      Boolean @default(true)
+  order       Int     @default(0)
+  createdAt   String
+}
+
+model Setting {
+  key   String @id
+  value Json
+}
+
+model AuditLog {
+  id        String  @id
+  adminName String
+  action    String
+  entity    String
+  entityId  String?
+  details   Json?
+  ip        String?
+  createdAt String
+}
