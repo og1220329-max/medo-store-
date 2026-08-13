@@ -6,11 +6,10 @@ import {
   Zap,
   ShieldCheck,
   Headphones,
-  Award,
-  Sparkles,
-  Flame,
-  ArrowLeft,
-  ChevronLeft,
+  Tag,
+  Star,
+  Shield,
+  MessageCircle,
 } from "lucide-react";
 
 export function Hero() {
@@ -18,119 +17,80 @@ export function Hero() {
     {
       icon: Zap,
       title: "تنفيذ فوري وسريع",
-      subtitle: "خلال دقائق معدودة",
-      color: "from-amber-500/20 to-amber-500/5",
-      borderColor: "border-amber-500/30",
-      textColor: "text-amber-400",
+      subtitle: "يتم تنفيذ طلبك في دقائق",
     },
     {
       icon: ShieldCheck,
       title: "دفع آمن 100%",
-      subtitle: "فودافون كاش، انستاباي، فوري وبطاقات",
-      color: "from-emerald-500/20 to-emerald-500/5",
-      borderColor: "border-emerald-500/30",
-      textColor: "text-emerald-400",
+      subtitle: "جميع طرق الدفع متاحة وآمنة",
     },
     {
       icon: Headphones,
       title: "دعم فني متواصل 24/7",
-      subtitle: "فريق جاهز لخدمتك على مدار الساعة",
-      color: "from-blue-500/20 to-blue-500/5",
-      borderColor: "border-blue-500/30",
-      textColor: "text-blue-400",
+      subtitle: "فريق دعم جاهز لخدمتك",
     },
     {
-      icon: Award,
+      icon: Tag,
       title: "أفضل أسعار السوق",
-      subtitle: "عروض مستمرة وخصومات حصرية",
-      color: "from-red-500/20 to-red-500/5",
-      borderColor: "border-red-500/30",
-      textColor: "text-[#DF0112]",
+      subtitle: "أرخص الأسعار وأفضل العروض",
     },
   ];
 
+  const avatars = [
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=64&h=64&fit=crop&crop=faces",
+  ];
+
   return (
-    <section className="relative w-full bg-[#08090d] pt-4 pb-8 overflow-hidden">
+    <section className="relative w-full bg-[#08090d] pt-3 pb-8 overflow-hidden">
       {/* Dynamic Ambient Red Spotlight */}
-      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-5xl h-[450px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.25)_0%,_rgba(223,1,18,0.06)_50%,_transparent_75%)]" />
+      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-6xl h-[500px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.22)_0%,_rgba(223,1,18,0.05)_50%,_transparent_75%)]" />
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-3 sm:px-5 md:px-8">
         
-        {/* Top Status Bar Tag */}
+        {/* Master Esports Hero Banner */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-3.5 flex items-center justify-between gap-2 flex-wrap"
+          transition={{ duration: 0.5 }}
+          className="relative group rounded-2xl md:rounded-3xl overflow-hidden border border-red-500/25 bg-[#050608] shadow-[0_15px_70px_rgba(223,1,18,0.25)] hover:shadow-[0_20px_80px_rgba(223,1,18,0.38)] transition-all duration-300"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-950/40 px-3.5 py-1 text-xs font-bold text-red-300 backdrop-blur-md shadow-sm">
-            <span className="flex size-2 rounded-full bg-[#DF0112] animate-ping" />
-            <span className="flex size-2 -ms-3 rounded-full bg-[#DF0112]" />
-            <Flame className="size-3.5 text-amber-400 ms-1" />
-            <span>متجر ميدو الرسمي — شحن فوري 24/7 مع ضمان كامل</span>
-          </div>
-
           <Link
             href="/products"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-white transition group"
+            className="block relative w-full aspect-[984/400] overflow-hidden cursor-pointer"
+            title="متجر ميدو للبطاقات الرقمية — اضغط للتسوق"
           >
-            <span>استعرض جميع المنتجات والشدات</span>
-            <ChevronLeft className="size-4 text-[#DF0112] transition-transform group-hover:-translate-x-1" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/medo-hero-banner.jpg"
+              alt="متجر ميدو للبطاقات الرقمية - تسوق الحين"
+              className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.012] [image-rendering:-webkit-optimize-contrast]"
+              loading="eager"
+            />
+            {/* Subtle interactive sheen */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-red-950/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
         </motion.div>
 
-        {/* Master Esports Hero Banner */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative group rounded-2xl md:rounded-[2.2rem] p-[2px] bg-gradient-to-br from-red-600/70 via-red-900/30 to-red-600/70 shadow-[0_15px_70px_rgba(223,1,18,0.32)] hover:shadow-[0_20px_90px_rgba(223,1,18,0.48)] transition-all duration-500"
-        >
-          {/* Tactical Gaming Corner Accents */}
-          <div className="pointer-events-none absolute -top-1 -start-1 size-5 border-t-2 border-s-2 border-red-500 rounded-tl-lg z-20" />
-          <div className="pointer-events-none absolute -top-1 -end-1 size-5 border-t-2 border-e-2 border-red-500 rounded-tr-lg z-20" />
-          <div className="pointer-events-none absolute -bottom-1 -start-1 size-5 border-b-2 border-s-2 border-red-500 rounded-bl-lg z-20" />
-          <div className="pointer-events-none absolute -bottom-1 -end-1 size-5 border-b-2 border-e-2 border-red-500 rounded-br-lg z-20" />
-
-          <div className="relative overflow-hidden rounded-[calc(1rem-1px)] md:rounded-[calc(2.2rem-2px)] bg-[#050608]">
-            <Link
-              href="/products"
-              className="block relative w-full aspect-[1024/469] overflow-hidden cursor-pointer"
-              title="متجر ميدو للبطاقات الرقمية — اضغط للتسوق"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/medo-hero-banner.jpg"
-                alt="متجر ميدو للبطاقات الرقمية - تسوق الحين"
-                className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.012] [image-rendering:-webkit-optimize-contrast] contrast-[1.04] saturate-[1.06] brightness-[1.02]"
-                loading="eager"
-              />
-              
-              {/* Subtle Edge Vignette */}
-              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[calc(1rem-1px)] md:rounded-[calc(2.2rem-2px)]" />
-              
-              {/* Interactive subtle sheen shimmer on hover */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-red-950/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Feature Badges Bar */}
+        {/* 4 Feature Badges Grid */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-5 sm:mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          className="mt-4 sm:mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
         >
           {features.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="flex items-center gap-3 sm:gap-3.5 rounded-2xl border border-white/10 bg-[#10121a]/85 p-3.5 sm:p-4 backdrop-blur-md transition-all duration-200 hover:border-red-500/40 hover:bg-[#151724] hover:-translate-y-0.5"
+                className="flex items-center gap-3 sm:gap-3.5 rounded-2xl border border-white/10 bg-[#0d0f15]/90 p-3.5 sm:p-4 backdrop-blur-md transition-all duration-200 hover:border-red-500/40 hover:bg-[#131622] hover:-translate-y-0.5"
               >
-                <div className={`flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} border ${item.borderColor} ${item.textColor} shadow-inner`}>
-                  <Icon className="size-5" />
+                <div className="flex size-11 sm:size-12 shrink-0 items-center justify-center rounded-full bg-red-950/30 border border-red-500/30 text-[#DF0112] shadow-inner">
+                  <Icon className="size-5 sm:size-5.5" />
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="text-xs sm:text-sm font-black text-white truncate">
@@ -144,6 +104,102 @@ export function Hero() {
             );
           })}
         </motion.div>
+
+        {/* Bottom Trust & Payment Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-4 rounded-2xl border border-white/10 bg-[#0d0f15]/90 p-3.5 sm:p-4 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-4"
+        >
+          {/* Left in RTL: Payment Methods */}
+          <div className="flex items-center gap-3 flex-wrap justify-center md:justify-start">
+            <div className="flex items-center gap-1.5 text-slate-400 text-xs font-bold">
+              <Shield className="size-4 text-emerald-400" />
+              <span>طرق دفع مضمونة وآمنة</span>
+            </div>
+
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {/* InstaPay */}
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#4b1d6e]/90 text-white text-[11px] font-black tracking-wide border border-purple-500/30">
+                instaPay
+              </div>
+              {/* Vodafone Cash */}
+              <div className="flex items-center justify-center px-2 py-1 rounded-md bg-[#e60000] text-white text-[11px] font-black border border-red-400/40">
+                vodafone cash
+              </div>
+              {/* Fawry */}
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#ffcc00] text-black text-[11px] font-black border border-amber-400/40">
+                Fawry
+              </div>
+              {/* Contact */}
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#004b93] text-white text-[11px] font-black border border-blue-400/40">
+                Contact
+              </div>
+              {/* VISA */}
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#1a1f71] text-white text-[11px] font-black tracking-wider border border-blue-300/30">
+                VISA
+              </div>
+              {/* Mastercard */}
+              <div className="flex items-center justify-center px-2 py-1 rounded-md bg-[#222329] border border-white/15">
+                <div className="flex -space-x-1.5 rtl:space-x-reverse">
+                  <span className="size-3.5 rounded-full bg-[#eb001b] inline-block opacity-90" />
+                  <span className="size-3.5 rounded-full bg-[#f79e1b] inline-block opacity-90" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Center in RTL: Ratings & Over 10,000 Customers */}
+          <div className="flex items-center gap-3.5">
+            <div className="flex items-center -space-x-2 rtl:space-x-reverse">
+              {avatars.map((img, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={i}
+                  src={img}
+                  alt={`Customer ${i + 1}`}
+                  className="size-7 rounded-full object-cover border-2 border-[#0d0f15]"
+                />
+              ))}
+            </div>
+
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-right">
+              <div className="flex items-center gap-1 text-amber-400">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="size-3 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span className="text-[11px] text-slate-400 font-medium">
+                تقييم 4.9 من أكثر من 10,000 عميل
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center px-2.5 py-0.5 rounded-lg bg-red-950/30 border border-red-500/20">
+              <span className="text-sm font-black text-[#DF0112]">+10K</span>
+              <span className="text-[10px] text-slate-400">عميل راضي</span>
+            </div>
+          </div>
+
+          {/* Right in RTL: WhatsApp Support Link */}
+          <a
+            href="https://wa.me/201000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 hover:opacity-90 transition group shrink-0"
+          >
+            <div className="flex flex-col text-left rtl:text-right">
+              <span className="text-[11px] text-slate-400 font-medium">تحتاج مساعدة؟</span>
+              <span className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">
+                تواصل معنا الآن
+              </span>
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-green-950/40 group-hover:scale-105 transition-transform">
+              <MessageCircle className="size-5 fill-white text-white" />
+            </div>
+          </a>
+        </motion.div>
+
       </div>
     </section>
   );
