@@ -37,26 +37,23 @@ export function Hero() {
   ];
 
   const avatars = [
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&fit=crop&crop=faces",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=faces",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&fit=crop&crop=faces",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&crop=faces",
-    "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=64&h=64&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop&crop=faces",
   ];
 
   return (
-    <section className="relative w-full bg-[#08090d] pt-3 pb-8 overflow-hidden">
-      {/* Dynamic Ambient Red Spotlight */}
-      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-6xl h-[500px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.22)_0%,_rgba(223,1,18,0.05)_50%,_transparent_75%)]" />
-
-      <div className="relative mx-auto w-full max-w-7xl px-3 sm:px-5 md:px-8">
+    <section className="relative w-full bg-[#08090d] pt-4 pb-8 overflow-hidden">
+      <div className="relative mx-auto w-full max-w-[1400px] px-4 md:px-8">
         
         {/* Master Esports Hero Banner */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative group rounded-2xl md:rounded-3xl overflow-hidden border border-red-500/25 bg-[#050608] shadow-[0_15px_70px_rgba(223,1,18,0.25)] hover:shadow-[0_20px_80px_rgba(223,1,18,0.38)] transition-all duration-300"
+          className="relative group rounded-2xl md:rounded-[1.8rem] overflow-hidden border border-white/10 bg-[#050608] shadow-[0_15px_70px_rgba(223,1,18,0.22)]"
         >
           <Link
             href="/products"
@@ -67,11 +64,9 @@ export function Hero() {
             <img
               src="/images/medo-hero-banner.jpg"
               alt="متجر ميدو للبطاقات الرقمية - تسوق الحين"
-              className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.012] [image-rendering:-webkit-optimize-contrast]"
+              className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.01]"
               loading="eager"
             />
-            {/* Subtle interactive sheen */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-red-950/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
         </motion.div>
 
@@ -80,17 +75,17 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-4 sm:mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
         >
           {features.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="flex items-center gap-3 sm:gap-3.5 rounded-2xl border border-white/10 bg-[#0d0f15]/90 p-3.5 sm:p-4 backdrop-blur-md transition-all duration-200 hover:border-red-500/40 hover:bg-[#131622] hover:-translate-y-0.5"
+                className="flex items-center gap-3 sm:gap-3.5 rounded-2xl border border-white/10 bg-[#0d0f15] p-3.5 sm:p-4 transition-all duration-200 hover:border-red-500/40 hover:bg-[#12141c]"
               >
-                <div className="flex size-11 sm:size-12 shrink-0 items-center justify-center rounded-full bg-red-950/30 border border-red-500/30 text-[#DF0112] shadow-inner">
-                  <Icon className="size-5 sm:size-5.5" />
+                <div className="flex size-11 sm:size-12 shrink-0 items-center justify-center rounded-full bg-red-950/40 border border-red-500/40 text-[#DF0112]">
+                  <Icon className="size-5 sm:size-5.5 text-[#DF0112]" />
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="text-xs sm:text-sm font-black text-white truncate">
@@ -110,48 +105,48 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="mt-4 rounded-2xl border border-white/10 bg-[#0d0f15]/90 p-3.5 sm:p-4 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-4"
+          className="mt-4 rounded-2xl border border-white/10 bg-[#0d0f15] p-3.5 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-4"
         >
           {/* Left in RTL: Payment Methods */}
           <div className="flex items-center gap-3 flex-wrap justify-center md:justify-start">
-            <div className="flex items-center gap-1.5 text-slate-400 text-xs font-bold">
-              <Shield className="size-4 text-emerald-400" />
+            <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
+              <Shield className="size-4 text-slate-400" />
               <span>طرق دفع مضمونة وآمنة</span>
             </div>
 
             <div className="flex items-center gap-1.5 flex-wrap">
               {/* InstaPay */}
-              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#4b1d6e]/90 text-white text-[11px] font-black tracking-wide border border-purple-500/30">
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#4b1d6e] text-white text-[11px] font-black tracking-wide">
                 instaPay
               </div>
               {/* Vodafone Cash */}
-              <div className="flex items-center justify-center px-2 py-1 rounded-md bg-[#e60000] text-white text-[11px] font-black border border-red-400/40">
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#e60000] text-white text-[11px] font-black">
                 vodafone cash
               </div>
               {/* Fawry */}
-              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#ffcc00] text-black text-[11px] font-black border border-amber-400/40">
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#ffcc00] text-black text-[11px] font-black">
                 Fawry
               </div>
               {/* Contact */}
-              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#004b93] text-white text-[11px] font-black border border-blue-400/40">
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#004b93] text-white text-[11px] font-black">
                 Contact
               </div>
               {/* VISA */}
-              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#1a1f71] text-white text-[11px] font-black tracking-wider border border-blue-300/30">
+              <div className="flex items-center justify-center px-2.5 py-1 rounded-md bg-[#1a1f71] text-white text-[11px] font-black tracking-wider">
                 VISA
               </div>
               {/* Mastercard */}
-              <div className="flex items-center justify-center px-2 py-1 rounded-md bg-[#222329] border border-white/15">
+              <div className="flex items-center justify-center px-2 py-1 rounded-md bg-[#222329] border border-white/10">
                 <div className="flex -space-x-1.5 rtl:space-x-reverse">
-                  <span className="size-3.5 rounded-full bg-[#eb001b] inline-block opacity-90" />
-                  <span className="size-3.5 rounded-full bg-[#f79e1b] inline-block opacity-90" />
+                  <span className="size-3.5 rounded-full bg-[#eb001b] inline-block" />
+                  <span className="size-3.5 rounded-full bg-[#f79e1b] inline-block" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Center in RTL: Ratings & Over 10,000 Customers */}
-          <div className="flex items-center gap-3.5">
+          {/* Center in RTL: Ratings & Customer Trust */}
+          <div className="flex items-center gap-3">
             <div className="flex items-center -space-x-2 rtl:space-x-reverse">
               {avatars.map((img, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -165,7 +160,7 @@ export function Hero() {
             </div>
 
             <div className="flex flex-col items-center sm:items-start text-center sm:text-right">
-              <div className="flex items-center gap-1 text-amber-400">
+              <div className="flex items-center gap-0.5 text-amber-400">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="size-3 fill-amber-400 text-amber-400" />
                 ))}
@@ -175,13 +170,13 @@ export function Hero() {
               </span>
             </div>
 
-            <div className="flex flex-col items-center px-2.5 py-0.5 rounded-lg bg-red-950/30 border border-red-500/20">
+            <div className="flex flex-col items-center ps-2 border-s border-white/10">
               <span className="text-sm font-black text-[#DF0112]">+10K</span>
-              <span className="text-[10px] text-slate-400">عميل راضي</span>
+              <span className="text-[10px] text-slate-400 font-medium">عميل راضي</span>
             </div>
           </div>
 
-          {/* Right in RTL: WhatsApp Support Link */}
+          {/* Right in RTL: WhatsApp Contact */}
           <a
             href="https://wa.me/201000000000"
             target="_blank"
