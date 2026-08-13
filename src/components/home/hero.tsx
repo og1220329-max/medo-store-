@@ -8,6 +8,9 @@ import {
   Headphones,
   Award,
   Sparkles,
+  Flame,
+  ArrowLeft,
+  ChevronLeft,
 } from "lucide-react";
 
 export function Hero() {
@@ -15,7 +18,7 @@ export function Hero() {
     {
       icon: Zap,
       title: "تنفيذ فوري وسريع",
-      subtitle: "يصلك طلبك خلال دقائق معدودة",
+      subtitle: "خلال دقائق معدودة",
       color: "from-amber-500/20 to-amber-500/5",
       borderColor: "border-amber-500/30",
       textColor: "text-amber-400",
@@ -47,20 +50,49 @@ export function Hero() {
   ];
 
   return (
-    <section className="relative w-full bg-[#08090d] pt-3 pb-8 overflow-hidden">
-      {/* Cinematic Ambient Glow Behind Hero */}
-      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[550px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.22)_0%,_rgba(223,1,18,0.05)_45%,_transparent_75%)]" />
+    <section className="relative w-full bg-[#08090d] pt-4 pb-8 overflow-hidden">
+      {/* Dynamic Ambient Red Spotlight */}
+      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-5xl h-[450px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.25)_0%,_rgba(223,1,18,0.06)_50%,_transparent_75%)]" />
 
-      <div className="relative mx-auto w-full max-w-[1600px] px-3 sm:px-5 md:px-8">
+      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         
-        {/* Main Gaming Banner with Precision Frame & Red Neon Edge */}
+        {/* Top Status Bar Tag */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative group rounded-2xl md:rounded-[2rem] p-[1.5px] bg-gradient-to-r from-red-600/50 via-red-500/20 to-red-600/50 shadow-[0_15px_60px_rgba(223,1,18,0.28)] hover:shadow-[0_20px_80px_rgba(223,1,18,0.4)] transition-all duration-500"
+          transition={{ duration: 0.4 }}
+          className="mb-3.5 flex items-center justify-between gap-2 flex-wrap"
         >
-          <div className="relative overflow-hidden rounded-[calc(1rem-1px)] md:rounded-[calc(2rem-1.5px)] bg-[#0c0d14]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-950/40 px-3.5 py-1 text-xs font-bold text-red-300 backdrop-blur-md shadow-sm">
+            <span className="flex size-2 rounded-full bg-[#DF0112] animate-ping" />
+            <span className="flex size-2 -ms-3 rounded-full bg-[#DF0112]" />
+            <Flame className="size-3.5 text-amber-400 ms-1" />
+            <span>متجر ميدو الرسمي — شحن فوري 24/7 مع ضمان كامل</span>
+          </div>
+
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-white transition group"
+          >
+            <span>استعرض جميع المنتجات والشدات</span>
+            <ChevronLeft className="size-4 text-[#DF0112] transition-transform group-hover:-translate-x-1" />
+          </Link>
+        </motion.div>
+
+        {/* Master Esports Hero Banner */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative group rounded-2xl md:rounded-[2.2rem] p-[2px] bg-gradient-to-br from-red-600/70 via-red-900/30 to-red-600/70 shadow-[0_15px_70px_rgba(223,1,18,0.32)] hover:shadow-[0_20px_90px_rgba(223,1,18,0.48)] transition-all duration-500"
+        >
+          {/* Tactical Gaming Corner Accents */}
+          <div className="pointer-events-none absolute -top-1 -start-1 size-5 border-t-2 border-s-2 border-red-500 rounded-tl-lg z-20" />
+          <div className="pointer-events-none absolute -top-1 -end-1 size-5 border-t-2 border-e-2 border-red-500 rounded-tr-lg z-20" />
+          <div className="pointer-events-none absolute -bottom-1 -start-1 size-5 border-b-2 border-s-2 border-red-500 rounded-bl-lg z-20" />
+          <div className="pointer-events-none absolute -bottom-1 -end-1 size-5 border-b-2 border-e-2 border-red-500 rounded-br-lg z-20" />
+
+          <div className="relative overflow-hidden rounded-[calc(1rem-1px)] md:rounded-[calc(2.2rem-2px)] bg-[#050608]">
             <Link
               href="/products"
               className="block relative w-full aspect-[1024/469] overflow-hidden cursor-pointer"
@@ -68,17 +100,17 @@ export function Hero() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/medo-hero-banner.png"
+                src="/images/medo-hero-banner.jpg"
                 alt="متجر ميدو للبطاقات الرقمية - تسوق الحين"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.012] [image-rendering:-webkit-optimize-contrast] contrast-[1.04] saturate-[1.06] brightness-[1.02]"
                 loading="eager"
               />
               
-              {/* Sleek Dark Edge Vignette to blend perfectly into dark mode */}
-              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[calc(1rem-1px)] md:rounded-[calc(2rem-1.5px)]" />
+              {/* Subtle Edge Vignette */}
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[calc(1rem-1px)] md:rounded-[calc(2.2rem-2px)]" />
               
               {/* Interactive subtle sheen shimmer on hover */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08090d]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-red-950/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
           </div>
         </motion.div>
@@ -88,7 +120,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-5 sm:mt-7 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          className="mt-5 sm:mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
         >
           {features.map((item, idx) => {
             const Icon = item.icon;
