@@ -154,8 +154,15 @@ function toProduct(row: {
 // ============ القراءة ============
 
 async function readSnapshot(): Promise<Store | null> {
-  const settingsRows = await prisma.setting.count();
+  let settingsRows = 0;
+  try {
+    settingsRows = await prisma.setting.count();
+  } catch {
+    // DB tables don't exist yet (e.g. fresh deployment before migration)
+    return null;
+  }
   if (settingsRows === 0) return null;
+
 
   const [roles, users, categories, products, orders, payments, coupons, reviews, messages, tickets, ticketMessages, notifications, banners, homepage, offers, auditLogs, settingsRowsData] = await Promise.all([
     prisma.role.findMany(),
