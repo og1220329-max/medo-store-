@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Headphones,
   Award,
+  Sparkles,
 } from "lucide-react";
 
 export function Hero() {
@@ -46,50 +47,57 @@ export function Hero() {
   ];
 
   return (
-    <section className="relative w-full bg-[#08090d] pt-2 pb-6 overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[500px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.18)_0%,_transparent_75%)]" />
+    <section className="relative w-full bg-[#08090d] pt-3 pb-8 overflow-hidden">
+      {/* Cinematic Ambient Glow Behind Hero */}
+      <div className="pointer-events-none absolute top-0 start-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[550px] bg-[radial-gradient(ellipse_at_top,_rgba(223,1,18,0.22)_0%,_rgba(223,1,18,0.05)_45%,_transparent_75%)]" />
 
-      <div className="relative mx-auto w-full max-w-[1600px] px-2 sm:px-4 md:px-6">
-        {/* Full Big Banner Container */}
+      <div className="relative mx-auto w-full max-w-[1600px] px-3 sm:px-5 md:px-8">
+        
+        {/* Main Gaming Banner with Precision Frame & Red Neon Edge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="relative group overflow-hidden rounded-2xl md:rounded-3xl border border-red-500/30 bg-[#0c0d14] shadow-[0_12px_60px_rgba(223,1,18,0.25)] hover:border-red-500/60 transition-colors duration-300"
+          transition={{ duration: 0.6 }}
+          className="relative group rounded-2xl md:rounded-[2rem] p-[1.5px] bg-gradient-to-r from-red-600/50 via-red-500/20 to-red-600/50 shadow-[0_15px_60px_rgba(223,1,18,0.28)] hover:shadow-[0_20px_80px_rgba(223,1,18,0.4)] transition-all duration-500"
         >
-          <Link
-            href="/products"
-            className="block relative w-full aspect-[1024/473] overflow-hidden cursor-pointer"
-            title="متجر ميدو للبطاقات الرقمية - اضغط للتسوق"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/medo-hero-banner.png"
-              alt="متجر ميدو للبطاقات الرقمية - تسوق الحين"
-              className="w-full h-full object-cover sm:object-fill transition-transform duration-500 group-hover:scale-[1.01]"
-              priority-load="true"
-            />
-            {/* Interactive Subtle Glow Overlay on Hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-red-950/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-          </Link>
+          <div className="relative overflow-hidden rounded-[calc(1rem-1px)] md:rounded-[calc(2rem-1.5px)] bg-[#0c0d14]">
+            <Link
+              href="/products"
+              className="block relative w-full aspect-[1024/469] overflow-hidden cursor-pointer"
+              title="متجر ميدو للبطاقات الرقمية — اضغط للتسوق"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/medo-hero-banner.png"
+                alt="متجر ميدو للبطاقات الرقمية - تسوق الحين"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                loading="eager"
+              />
+              
+              {/* Sleek Dark Edge Vignette to blend perfectly into dark mode */}
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[calc(1rem-1px)] md:rounded-[calc(2rem-1.5px)]" />
+              
+              {/* Interactive subtle sheen shimmer on hover */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08090d]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+          </div>
         </motion.div>
 
-        {/* Feature Badges Grid */}
+        {/* Feature Badges Bar */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-4 sm:mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+          className="mt-5 sm:mt-7 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
         >
           {features.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="flex items-center gap-3 sm:gap-3.5 rounded-2xl border border-white/10 bg-[#10121a]/90 p-3 sm:p-4 backdrop-blur-sm transition-all duration-200 hover:border-red-500/30 hover:bg-[#151724]"
+                className="flex items-center gap-3 sm:gap-3.5 rounded-2xl border border-white/10 bg-[#10121a]/85 p-3.5 sm:p-4 backdrop-blur-md transition-all duration-200 hover:border-red-500/40 hover:bg-[#151724] hover:-translate-y-0.5"
               >
-                <div className={`flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} border ${item.borderColor} ${item.textColor}`}>
+                <div className={`flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} border ${item.borderColor} ${item.textColor} shadow-inner`}>
                   <Icon className="size-5" />
                 </div>
                 <div className="flex flex-col min-w-0">
