@@ -2,12 +2,14 @@ export function cn(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
 }
 
-export function formatPrice(amount: number, currency = "EGP") {
+export function formatPrice(amount: number, currency = "ج.م") {
   const formatted = new Intl.NumberFormat("ar-EG", {
     maximumFractionDigits: 0,
   }).format(amount);
   return `${formatted} ${currency}`;
 }
+
+export const formatCurrency = formatPrice;
 
 export function formatNumber(amount: number) {
   return new Intl.NumberFormat("ar-EG").format(amount);
