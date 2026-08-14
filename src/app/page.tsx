@@ -44,13 +44,7 @@ export default async function HomePage() {
       {sections.get("categories")?.enabled !== false && (
         <Categories categories={store.categories} socialCategory={socialCategory} />
       )}
-      {bestSection?.enabled !== false && (
-        <WeeklyBest
-          products={weeklyProducts}
-          title={bestSection?.title || "أفضل المنتجات لهذا الأسبوع"}
-          subtitle={bestSection?.subtitle || "استعرض أكثر المنتجات طلباً من عملائنا واختر ما يناسبك بكل سهولة."}
-        />
-      )}
+      {bestSection?.enabled !== false && <WeeklyBest />}
       {sections.get("featured")?.enabled !== false && (
         <FeaturedProducts mode="featured" />
       )}
