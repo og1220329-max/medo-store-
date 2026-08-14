@@ -25,7 +25,7 @@ const DEFAULT_FEATURED_CATEGORIES: CategoryCardItem[] = [
     title: "باقات ببجي",
     subtitle: "باقات مميزة بأسعار أقل",
     image: "/images/cat-crate-3d.jpg",
-    href: "/categories/pubg-bundles",
+    href: "/categories/bundles",
   },
   {
     id: "pubg-services",
@@ -46,7 +46,7 @@ const DEFAULT_FEATURED_CATEGORIES: CategoryCardItem[] = [
     title: "منتجات رقمية",
     subtitle: "بطاقات شحن وألعاب أخرى",
     image: "/images/cat-giftcards-3d.jpg",
-    href: "/categories/digital-cards",
+    href: "/categories/digital",
   },
 ];
 

@@ -20,7 +20,7 @@ export async function GET() {
       lastLoginAt: u.lastLoginAt || null,
       ordersCount: userOrders.length,
       totalSpent: userOrders
-        .filter((o) => o.status !== "cancelled")
+        .filter((o) => o.payment.status === "paid" && o.status !== "cancelled")
         .reduce((sum, o) => sum + o.total, 0),
     };
   });

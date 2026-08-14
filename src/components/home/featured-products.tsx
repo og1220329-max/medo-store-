@@ -7,17 +7,20 @@ import { ProductCard } from "@/components/product/product-card";
 import { Button } from "@/components/ui/primitives";
 import { CountdownTimer } from "@/components/ui/countdown";
 
-export async function FeaturedProducts() {
+export async function FeaturedProducts({
+  mode = "featured",
+}: {
+  mode?: "featured" | "best";
+}) {
   const store = await getStore();
   const featured = store.products
-    .filter((p) => p.active && p.featured)
+    .filter((p) => p.active && (mode === "best" ? p.bestSeller : p.featured))
     .slice(0, 8);
-
   const categoryMeta: Record<string, { label: string; icon: typeof Flame; href: string }> = {
     "c-pubg-uc": { label: "شدات ببجي", icon: GemIcon, href: "/categories/pubg-uc" },
     "c-social": { label: "السوشيال ميديا", icon: Users, href: "/services/social-media" },
     "c-pubg-services": { label: "خدمات ببجي", icon: Flame, href: "/categories/pubg-services" },
-    "c-digital": { label: "منتجات رقمية", icon: Gift, href: "/categories/digital-products" },
+    "c-digital": { label: "منتجات رقمية", icon: Gift, href: "/categories/digital" },
   };
 
   return (

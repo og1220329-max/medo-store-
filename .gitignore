@@ -12,3 +12,6 @@ next-env.d.ts
 src/data/store.json
 prisma/dev.db*
 prisma/dev.db-journal
+
+.env
+.env.*

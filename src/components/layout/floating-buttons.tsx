@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 export function FloatingButtons() {
   const [showTop, setShowTop] = useState(false);
+  const [whatsapp, setWhatsapp] = useState("201202053951");
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 600);
@@ -15,7 +16,17 @@ export function FloatingButtons() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=201202053951&text=${encodeURIComponent("مرحبًا، عندي استفسار بخصوص متجركم")}`;
+  useEffect(() => {
+    fetch("/api/site", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        const digits = String(d?.settings?.whatsapp || "").replace(/\D/g, "");
+        if (digits) setWhatsapp(digits);
+      })
+      .catch(() => {});
+  }, []);
+
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent("مرحبًا، عندي استفسار بخصوص متجركم")}`;
 
   return (
     <>

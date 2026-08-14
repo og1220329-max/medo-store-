@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getStore, saveStore } from "@/lib/db/store";
-import { hashPassword } from "@/lib/auth";
+import { hashPassword, sha256 } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -16,8 +16,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "كلمة المرور 8 أحرف على الأقل" }, { status: 422 });
   }
 
+  const tokenHash = sha256(token);
   const store = await getStore();
-  const user = store.users.find((u) => u.resetTokenHash === token);
+  const user = store.users.find((u) => u.resetTokenHash === tokenHash);
   if (!user) {
     return NextResponse.json({ message: "الرابط غير صالح أو منتهي" }, { status: 404 });
   }

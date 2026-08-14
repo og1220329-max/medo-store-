@@ -34,12 +34,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "السلة فارغة" }, { status: 422 });
     }
 
-    const items = await buildOrderItems(lines);
+    const { items, errors } = await buildOrderItems(
+      lines.map((l: { productId?: unknown; quantity?: unknown; customData?: unknown }) => ({
+        productId: String(l.productId || ""),
+        quantity: Number(l.quantity),
+        customData:
+          l.customData && typeof l.customData === "object"
+            ? (l.customData as Record<string, string>)
+            : {},
+      }))
+    );
     if (items.length === 0) {
       return NextResponse.json(
-        { message: "لا توجد منتجات صالحة في الطلب" },
+        { message: errors[0] || "لا توجد منتجات صالحة في الطلب" },
         { status: 422 }
       );
+    }
+    if (errors.length > 0) {
+      return NextResponse.json({ message: errors[0] }, { status: 422 });
     }
 
     const paymentMethod = String(body.paymentMethod || "");

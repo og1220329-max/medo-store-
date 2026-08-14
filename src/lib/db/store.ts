@@ -268,44 +268,44 @@ async function writeSnapshot(store: Store): Promise<void> {
     }))
   );
 
-  await prisma.$transaction([
-    prisma.orderItem.deleteMany(),
-    prisma.payment.deleteMany(),
-    prisma.review.deleteMany(),
-    prisma.order.deleteMany(),
-    prisma.ticketMessage.deleteMany(),
-    prisma.ticket.deleteMany(),
-    prisma.notification.deleteMany(),
-    prisma.user.deleteMany(),
-    prisma.product.deleteMany(),
-    prisma.category.deleteMany(),
-    prisma.role.deleteMany(),
-    prisma.supportMessage.deleteMany(),
-    prisma.coupon.deleteMany(),
-    prisma.banner.deleteMany(),
-    prisma.homepageSection.deleteMany(),
-    prisma.offer.deleteMany(),
-    prisma.auditLog.deleteMany(),
-    prisma.setting.deleteMany(),
-    prisma.role.createMany({ data: store.roles.map((r) => ({ id: r.id, name: r.name, description: r.description || null, permissions: r.permissions as never, isSystem: r.isSystem, createdAt: r.createdAt })) }),
-    prisma.user.createMany({ data: store.users.map((u) => ({ id: u.id, name: u.name, email: u.email, phone: u.phone || null, passwordHash: u.passwordHash || "", role: u.role, roleId: u.roleId || null, active: u.active, resetTokenHash: u.resetTokenHash || null, resetExpiresAt: u.resetExpiresAt || null, lastLoginAt: u.lastLoginAt || null, createdAt: u.createdAt })) }),
-    prisma.category.createMany({ data: store.categories.map((c) => ({ id: c.id, slug: c.slug, name: c.name, description: c.description || null, icon: c.icon, image: c.image, parentId: c.parentId || null, order: c.order, active: c.active, createdAt: c.createdAt })) }),
-    prisma.product.createMany({ data: store.products.map((p) => ({ id: p.id, slug: p.slug, sku: p.sku || null, name: p.name, description: p.description, shortDescription: p.shortDescription || null, categoryId: p.categoryId, image: p.image, images: (p.images || []) as never, price: p.price, oldPrice: p.oldPrice || null, costPrice: p.costPrice || null, stock: p.stock, unlimitedStock: p.unlimitedStock ?? false, active: p.active, featured: p.featured ?? false, bestSeller: p.bestSeller ?? false, isNew: p.isNew ?? false, deliveryTime: p.deliveryTime, type: p.type || "digital", features: p.features as never, requiredFields: p.requiredFields as never, rating: p.rating, reviewsCount: p.reviewsCount, badge: p.badge || null, createdAt: p.createdAt })) }),
-    prisma.order.createMany({ data: orderRows }),
-    prisma.orderItem.createMany({ data: itemRows }),
-    prisma.payment.createMany({ data: store.payments.map((p) => ({ id: p.id, orderId: p.orderId, method: p.method, status: p.status, amount: p.amount, reference: p.reference || null, createdAt: p.createdAt, paidAt: p.paidAt || null })) }),
-    prisma.coupon.createMany({ data: store.coupons.map((c) => ({ id: c.id, code: c.code, type: c.type, value: c.value, minOrder: c.minOrder || null, maxDiscount: c.maxDiscount || null, startsAt: c.startsAt || null, expiresAt: c.expiresAt || null, maxUses: c.maxUses, perUserLimit: c.perUserLimit || 0, active: c.active, used: c.used, createdAt: c.createdAt })) }),
-    prisma.review.createMany({ data: store.reviews.map((r) => ({ id: r.id, productId: r.productId || "", orderId: r.orderId || null, userId: r.userId || null, name: r.name, rating: r.rating, comment: r.text, verified: r.verified ?? false, approved: r.approved ?? true, featured: r.featured ?? false, createdAt: r.date })) }),
-    prisma.ticket.createMany({ data: store.tickets.map((t) => ({ id: t.id, number: t.number, userId: t.userId || null, name: t.name, email: t.email || null, phone: t.phone || null, subject: t.subject, orderNumber: t.orderNumber || null, status: t.status, createdAt: t.createdAt, updatedAt: t.updatedAt })) }),
-    prisma.supportMessage.createMany({ data: store.messages.map((m) => ({ id: m.id, name: m.name, email: m.email, subject: m.subject, message: m.message, read: m.read, createdAt: m.createdAt })) }),
-    prisma.ticketMessage.createMany({ data: store.tickets.flatMap((t) => t.messages.map((m) => ({ id: m.id, ticketId: t.id, fromAdmin: m.fromAdmin, message: m.message, createdAt: m.createdAt }))) }),
-    prisma.notification.createMany({ data: store.notifications.map((n) => ({ id: n.id, userId: n.userId || null, type: n.type, title: n.title, body: n.body || null, link: n.link || null, read: n.read, createdAt: n.createdAt })) }),
-    prisma.banner.createMany({ data: store.banners.map((b) => ({ id: b.id, title: b.title, subtitle: b.subtitle || null, image: b.image, buttonText: b.buttonText || null, buttonUrl: b.buttonUrl || null, startsAt: b.startsAt || null, endsAt: b.endsAt || null, active: b.active, order: b.order, createdAt: b.createdAt })) }),
-    prisma.homepageSection.createMany({ data: store.homepage.map((h) => ({ key: h.key, name: h.name, enabled: h.enabled, title: h.title || null, subtitle: h.subtitle || null, order: h.order })) }),
-    prisma.offer.createMany({ data: store.offers.map((o) => ({ id: o.id, title: o.title, description: o.description || null, badge: o.badge || null, image: o.image || null, discountPct: o.discountPct || null, productIds: o.productIds as never, startsAt: o.startsAt || null, endsAt: o.endsAt || null, active: o.active, order: o.order, createdAt: o.createdAt })) }),
-    prisma.auditLog.createMany({ data: store.auditLogs.map((a) => ({ id: a.id, adminName: a.adminName, action: a.action, entity: a.entity, entityId: a.entityId || null, details: (a.details || null) as never, ip: a.ip || null, createdAt: a.createdAt })) }),
-    prisma.setting.create({ data: { key: "site", value: store.settings as never } }),
-  ]);
+  await prisma.$transaction(async (tx) => {
+    await tx.orderItem.deleteMany();
+    await tx.payment.deleteMany();
+    await tx.review.deleteMany();
+    await tx.order.deleteMany();
+    await tx.ticketMessage.deleteMany();
+    await tx.ticket.deleteMany();
+    await tx.notification.deleteMany();
+    await tx.user.deleteMany();
+    await tx.product.deleteMany();
+    await tx.category.deleteMany();
+    await tx.role.deleteMany();
+    await tx.supportMessage.deleteMany();
+    await tx.coupon.deleteMany();
+    await tx.banner.deleteMany();
+    await tx.homepageSection.deleteMany();
+    await tx.offer.deleteMany();
+    await tx.auditLog.deleteMany();
+    await tx.setting.deleteMany();
+    await tx.role.createMany({ data: store.roles.map((r) => ({ id: r.id, name: r.name, description: r.description || null, permissions: r.permissions as never, isSystem: r.isSystem, createdAt: r.createdAt })) });
+    await tx.user.createMany({ data: store.users.map((u) => ({ id: u.id, name: u.name, email: u.email, phone: u.phone || null, passwordHash: u.passwordHash || "", role: u.role, roleId: u.roleId || null, active: u.active, resetTokenHash: u.resetTokenHash || null, resetExpiresAt: u.resetExpiresAt || null, lastLoginAt: u.lastLoginAt || null, createdAt: u.createdAt })) });
+    await tx.category.createMany({ data: store.categories.map((c) => ({ id: c.id, slug: c.slug, name: c.name, description: c.description || null, icon: c.icon, image: c.image, parentId: c.parentId || null, order: c.order, active: c.active, createdAt: c.createdAt })) });
+    await tx.product.createMany({ data: store.products.map((p) => ({ id: p.id, slug: p.slug, sku: p.sku || null, name: p.name, description: p.description, shortDescription: p.shortDescription || null, categoryId: p.categoryId, image: p.image, images: (p.images || []) as never, price: p.price, oldPrice: p.oldPrice || null, costPrice: p.costPrice || null, stock: p.stock, unlimitedStock: p.unlimitedStock ?? false, active: p.active, featured: p.featured ?? false, bestSeller: p.bestSeller ?? false, isNew: p.isNew ?? false, deliveryTime: p.deliveryTime, type: p.type || "digital", features: p.features as never, requiredFields: p.requiredFields as never, rating: p.rating, reviewsCount: p.reviewsCount, badge: p.badge || null, createdAt: p.createdAt })) });
+    await tx.order.createMany({ data: orderRows });
+    await tx.orderItem.createMany({ data: itemRows });
+    await tx.payment.createMany({ data: store.payments.map((p) => ({ id: p.id, orderId: p.orderId, method: p.method, status: p.status, amount: p.amount, reference: p.reference || null, createdAt: p.createdAt, paidAt: p.paidAt || null })) });
+    await tx.coupon.createMany({ data: store.coupons.map((c) => ({ id: c.id, code: c.code, type: c.type, value: c.value, minOrder: c.minOrder || null, maxDiscount: c.maxDiscount || null, startsAt: c.startsAt || null, expiresAt: c.expiresAt || null, maxUses: c.maxUses, perUserLimit: c.perUserLimit || 0, active: c.active, used: c.used, createdAt: c.createdAt })) });
+    await tx.review.createMany({ data: store.reviews.map((r) => ({ id: r.id, productId: r.productId || "", orderId: r.orderId || null, userId: r.userId || null, name: r.name, rating: r.rating, comment: r.text, verified: r.verified ?? false, approved: r.approved ?? true, featured: r.featured ?? false, createdAt: r.date })) });
+    await tx.ticket.createMany({ data: store.tickets.map((t) => ({ id: t.id, number: t.number, userId: t.userId || null, name: t.name, email: t.email || null, phone: t.phone || null, subject: t.subject, orderNumber: t.orderNumber || null, status: t.status, createdAt: t.createdAt, updatedAt: t.updatedAt })) });
+    await tx.supportMessage.createMany({ data: store.messages.map((m) => ({ id: m.id, name: m.name, email: m.email, subject: m.subject, message: m.message, read: m.read, createdAt: m.createdAt })) });
+    await tx.ticketMessage.createMany({ data: store.tickets.flatMap((t) => t.messages.map((m) => ({ id: m.id, ticketId: t.id, fromAdmin: m.fromAdmin, message: m.message, createdAt: m.createdAt }))) });
+    await tx.notification.createMany({ data: store.notifications.map((n) => ({ id: n.id, userId: n.userId || null, type: n.type, title: n.title, body: n.body || null, link: n.link || null, read: n.read, createdAt: n.createdAt })) });
+    await tx.banner.createMany({ data: store.banners.map((b) => ({ id: b.id, title: b.title, subtitle: b.subtitle || null, image: b.image, buttonText: b.buttonText || null, buttonUrl: b.buttonUrl || null, startsAt: b.startsAt || null, endsAt: b.endsAt || null, active: b.active, order: b.order, createdAt: b.createdAt })) });
+    await tx.homepageSection.createMany({ data: store.homepage.map((h) => ({ key: h.key, name: h.name, enabled: h.enabled, title: h.title || null, subtitle: h.subtitle || null, order: h.order })) });
+    await tx.offer.createMany({ data: store.offers.map((o) => ({ id: o.id, title: o.title, description: o.description || null, badge: o.badge || null, image: o.image || null, discountPct: o.discountPct || null, productIds: o.productIds as never, startsAt: o.startsAt || null, endsAt: o.endsAt || null, active: o.active, order: o.order, createdAt: o.createdAt })) });
+    await tx.auditLog.createMany({ data: store.auditLogs.map((a) => ({ id: a.id, adminName: a.adminName, action: a.action, entity: a.entity, entityId: a.entityId || null, details: (a.details || null) as never, ip: a.ip || null, createdAt: a.createdAt })) });
+    await tx.setting.create({ data: { key: "site", value: store.settings as never } });
+  }, { timeout: 20000 });
 }
 
 // ============ الواجهة العامة ============

@@ -23,7 +23,7 @@ const CATEORY_LINKS = [
   { label: "خدمات ببجي", href: "/categories/pubg-services" },
   { label: "شدات ببجي", href: "/categories/pubg-uc" },
   { label: "السوشيال ميديا", href: "/services/social-media" },
-  { label: "المنتجات الرقمية", href: "/categories/digital-products" },
+  { label: "المنتجات الرقمية", href: "/categories/digital" },
 ];
 
 export async function Footer() {

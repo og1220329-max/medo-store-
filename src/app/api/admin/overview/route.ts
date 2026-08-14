@@ -13,11 +13,11 @@ export async function GET() {
   const store = await getStore();
   const orders = store.orders;
 
+  const paidOrders = orders.filter((o) => o.payment.status === "paid");
+
   const totals = {
     orders: orders.length,
-    revenue: orders
-      .filter((o) => o.payment.status === "paid" || o.status !== "cancelled")
-      .reduce((sum, o) => sum + o.total, 0),
+    revenue: paidOrders.reduce((sum, o) => sum + o.total, 0),
     pending: orders.filter((o) => o.status === "created" || o.status === "paid").length,
     processing: orders.filter((o) => o.status === "processing" || o.status === "executing").length,
     completed: orders.filter((o) => o.status === "delivered").length,
@@ -25,7 +25,7 @@ export async function GET() {
     products: store.products.filter((p) => p.active).length,
   };
 
-  // مبيعات آخر 7 أيام
+  // مبيعات آخر 7 أيام (المدفوعة فقط)
   const days: { label: string; revenue: number; orders: number }[] = [];
   for (let i = 6; i >= 0; i--) {
     const d = new Date();
@@ -33,9 +33,9 @@ export async function GET() {
     d.setDate(d.getDate() - i);
     const next = new Date(d);
     next.setDate(next.getDate() + 1);
-    const dayOrders = orders.filter((o) => {
+    const dayOrders = paidOrders.filter((o) => {
       const t = new Date(o.createdAt).getTime();
-      return t >= d.getTime() && t < next.getTime() && o.status !== "cancelled";
+      return t >= d.getTime() && t < next.getTime();
     });
     days.push({
       label: new Intl.DateTimeFormat("ar-EG", { weekday: "short" }).format(d),

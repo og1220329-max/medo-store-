@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import type { Product } from "@/lib/types";
@@ -26,8 +26,7 @@ export function QuickViewModal({
   const [qty, setQty] = useState(1);
   const discount = discountPercent(product.price, product.oldPrice);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useMemo(() => {
+  useEffect(() => {
     if (open) setQty(1);
   }, [open]);
 

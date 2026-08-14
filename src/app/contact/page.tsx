@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Facebook,
@@ -15,55 +15,82 @@ import { useToast } from "@/store/toast";
 import { Button, Field, Input, Textarea } from "@/components/ui/primitives";
 import { Breadcrumbs } from "@/components/ui/common";
 
-const CHANNELS = [
-  {
-    label: "واتساب",
-    value: process.env.NEXT_PUBLIC_WHATSAPP || "201000000000",
-    href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201000000000"}`,
-    icon: MessageCircle,
-    color: "from-emerald-500 to-emerald-600",
-  },
-  {
-    label: "تيليجرام",
-    value: `@${process.env.NEXT_PUBLIC_TELEGRAM || "medostore"}`,
-    href: `https://t.me/${process.env.NEXT_PUBLIC_TELEGRAM || "medostore"}`,
-    icon: Send,
-    color: "from-sky-500 to-cyan-600",
-  },
-  {
-    label: "فيسبوك",
-    value: "MEDO STORE",
-    href: "#",
-    icon: Facebook,
-    color: "from-blue-500 to-blue-700",
-  },
-  {
-    label: "إنستجرام",
-    value: "@medostore",
-    href: "https://instagram.com",
-    icon: Instagram,
-    color: "from-fuchsia-500 to-rose-500",
-  },
-  {
-    label: "البريد",
-    value: process.env.NEXT_PUBLIC_EMAIL || "support@medostore.shop",
-    href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || "support@medostore.shop"}`,
-    icon: Mail,
-    color: "from-volt-500 to-glow-500",
-  },
-  {
-    label: "الهاتف",
-    value: process.env.NEXT_PUBLIC_WHATSAPP || "+20 100 000 0000",
-    href: `tel:${process.env.NEXT_PUBLIC_WHATSAPP || "201000000000"}`,
-    icon: Phone,
-    color: "from-amber-500 to-orange-600",
-  },
-];
+type Channel = {
+  label: string;
+  value: string;
+  href: string;
+  icon: typeof Facebook;
+  color: string;
+};
+
+function buildChannels(s: Record<string, string>): Channel[] {
+  const whatsapp =
+    String(s.whatsapp || process.env.NEXT_PUBLIC_WHATSAPP || "201000000000").replace(/\D/g, "");
+  const telegram = s.telegram || process.env.NEXT_PUBLIC_TELEGRAM || "medostore";
+  const facebook = s.facebook || "medostore";
+  const instagram = s.instagram || "medostore";
+  const email = s.email || process.env.NEXT_PUBLIC_EMAIL || "support@medostore.shop";
+
+  return [
+    {
+      label: "واتساب",
+      value: `+${whatsapp}`,
+      href: `https://wa.me/${whatsapp}`,
+      icon: MessageCircle,
+      color: "from-emerald-500 to-emerald-600",
+    },
+    {
+      label: "تيليجرام",
+      value: `@${telegram}`,
+      href: `https://t.me/${telegram}`,
+      icon: Send,
+      color: "from-sky-500 to-cyan-600",
+    },
+    {
+      label: "فيسبوك",
+      value: `facebook.com/${facebook}`,
+      href: `https://facebook.com/${facebook}`,
+      icon: Facebook,
+      color: "from-blue-500 to-blue-700",
+    },
+    {
+      label: "إنستجرام",
+      value: `@${instagram}`,
+      href: `https://instagram.com/${instagram}`,
+      icon: Instagram,
+      color: "from-fuchsia-500 to-rose-500",
+    },
+    {
+      label: "البريد",
+      value: email,
+      href: `mailto:${email}`,
+      icon: Mail,
+      color: "from-volt-500 to-glow-500",
+    },
+    {
+      label: "الهاتف",
+      value: `+${whatsapp}`,
+      href: `tel:+${whatsapp}`,
+      icon: Phone,
+      color: "from-amber-500 to-orange-600",
+    },
+  ];
+}
 
 export default function ContactPage() {
   const toast = useToast();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sending, setSending] = useState(false);
+  const [channels, setChannels] = useState<Channel[]>(() => buildChannels({}));
+
+  useEffect(() => {
+    fetch("/api/site", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.settings) setChannels(buildChannels(d.settings));
+      })
+      .catch(() => {});
+  }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,7 +135,7 @@ export default function ContactPage() {
 
       <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-4">
-          {CHANNELS.map((ch, i) => (
+          {channels.map((ch, i) => (
             <motion.a
               key={ch.label}
               href={ch.href}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getStore } from "@/lib/db/store";
 import { Hero } from "@/components/home/hero";
+import { TrustBar } from "@/components/home/trust-bar";
 import { Categories } from "@/components/home/categories";
 import { BannerSlider } from "@/components/home/banner-slider";
 import { FeaturedProducts } from "@/components/home/featured-products";
@@ -28,16 +29,27 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero />
+      {sections.get("hero")?.enabled !== false && <Hero />}
+      {sections.get("trust-bar")?.enabled !== false && <TrustBar />}
       {sections.get("categories")?.enabled !== false && (
         <Categories categories={store.categories} socialCategory={socialCategory} />
       )}
       {sections.get("banner-slider")?.enabled !== false && <BannerSlider />}
-      {sections.get("featured")?.enabled !== false && <FeaturedProducts />}
+      {sections.get("featured")?.enabled !== false ? (
+        <FeaturedProducts mode="featured" />
+      ) : sections.get("best-sellers")?.enabled !== false ? (
+        <FeaturedProducts mode="best" />
+      ) : null}
       {sections.get("social-media")?.enabled !== false && <SocialMediaStrip />}
       {sections.get("offers")?.enabled !== false && <OffersSection />}
       {sections.get("why-us")?.enabled !== false && <WhyUs />}
-      {sections.get("reviews")?.enabled !== false && <Reviews reviews={store.reviews} />}
+      {sections.get("reviews")?.enabled !== false && (
+        <Reviews
+          reviews={store.reviews
+            .filter((r) => r.approved !== false)
+            .sort((a, b) => Number(b.featured) - Number(a.featured))}
+        />
+      )}
       {sections.get("faq")?.enabled !== false && <FAQSection compact />}
       {sections.get("contact")?.enabled !== false && <ContactSection settings={store.settings} />}
     </>

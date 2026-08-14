@@ -13,7 +13,7 @@ export function CountdownTimer({
   compact?: boolean;
   className?: string;
 }) {
-  const [left, setLeft] = useState(0);
+  const [left, setLeft] = useState<number | null>(null);
 
   useEffect(() => {
     const target = new Date(endsAt).getTime();
@@ -22,6 +22,17 @@ export function CountdownTimer({
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, [endsAt]);
+
+  // قبل اكتمال التحميل نعرض صفًا فارغًا بدل وميض "انتهى العرض"
+  if (left === null) {
+    return (
+      <div className={cn("flex items-center gap-2", className)} dir="ltr" aria-hidden>
+        {Array.from({ length: compact ? 3 : 4 }).map((_, i) => (
+          <span key={i} className="size-9 rounded-xl bg-white/5 md:size-12" />
+        ))}
+      </div>
+    );
+  }
 
   const total = Math.floor(left / 1000);
   const days = Math.floor(total / 86400);

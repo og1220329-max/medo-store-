@@ -38,7 +38,7 @@ const SERVICE_CARDS = [
     color: "from-fuchsia-500 to-rose-500",
   },
   {
-    href: "/categories/digital-products",
+    href: "/categories/digital",
     icon: Gift,
     title: "المنتجات الرقمية",
     text: "بطاقات قيمة واشتراكات وخدمات رقمية متنوعة",

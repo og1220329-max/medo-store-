@@ -224,7 +224,7 @@ export function Header() {
                       شدات ببجي العالمية
                     </Link>
                     <Link
-                      href="/categories/pubg-bundles"
+                      href="/categories/bundles"
                       className="block px-3 py-2 text-xs font-bold text-slate-200 hover:text-white hover:bg-white/5 rounded-lg transition"
                     >
                       باقات ببجي المميزة
@@ -279,7 +279,7 @@ export function Header() {
                       خدمات السوشيال ميديا
                     </Link>
                     <Link
-                      href="/categories/digital-cards"
+                      href="/categories/digital"
                       className="block px-3 py-2 text-xs font-bold text-slate-200 hover:text-white hover:bg-white/5 rounded-lg transition"
                     >
                       بطاقات رقمية وشحن
@@ -413,11 +413,11 @@ function MobileNav({
   const links = [
     { href: "/", label: "الرئيسية" },
     { href: "/products", label: "المتجر" },
-    { href: "/categories/pubg-uc", label: "شدات ببجي" },
-    { href: "/categories/pubg-bundles", label: "باقات ببجي" },
+{ href: "/categories/pubg-uc", label: "شدات ببجي" },
+    { href: "/categories/bundles", label: "باقات ببجي" },
     { href: "/categories/pubg-services", label: "خدمات ببجي" },
-    { href: "/services/social-media", label: "خدمات السوشيال" },
-    { href: "/categories/digital-cards", label: "منتجات رقمية" },
+    { href: "/categories/pubg-kr", label: "ببجي كوريا" },
+    { href: "/categories/digital", label: "منتجات رقمية" },
     { href: "/offers", label: "العروض" },
     { href: "/orders/track", label: "تتبع الطلب" },
     { href: "/contact", label: "تواصل معنا" },

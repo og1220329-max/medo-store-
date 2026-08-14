@@ -443,13 +443,15 @@ const homepage: HomepageSection[] = [
   { key: "hero", name: "الواجهة الرئيسية (Hero)", enabled: true, order: 1 },
   { key: "trust-bar", name: "شريط الثقة", enabled: true, order: 2 },
   { key: "categories", name: "الفئات", enabled: true, title: "تصفح حسب الفئة", subtitle: "كل احتياجاتك الرقمية في مكان واحد — اختر الفئة وابدأ طلبك مباشرة.", order: 3 },
-  { key: "featured", name: "منتجات مميزة", enabled: true, title: "الأكثر تميزًا", subtitle: "منتجات مختارة بعناية لعملائنا.", order: 4 },
-  { key: "best-sellers", name: "الأكثر مبيعًا", enabled: true, title: "الأكثر مبيعًا", subtitle: "المنتجات اللي عملاؤنا بيثقوا فيها أكثر.", order: 5 },
-  { key: "offers", name: "العروض والفلو سيل", enabled: true, title: "عروض اليوم 🔥", subtitle: "خصومات تصل إلى 40% — العرض ينتهي قريبًا!", order: 6 },
-  { key: "why-us", name: "لماذا نحن", enabled: true, order: 7 },
-  { key: "reviews", name: "آراء العملاء", enabled: true, title: "ماذا يقول عملاؤنا؟", order: 8 },
-  { key: "faq", name: "الأسئلة الشائعة", enabled: true, order: 9 },
-  { key: "contact", name: "تواصل معنا", enabled: true, order: 10 },
+  { key: "banner-slider", name: "سلايدر البانرات", enabled: true, order: 4 },
+  { key: "featured", name: "منتجات مميزة", enabled: true, title: "الأكثر تميزًا", subtitle: "منتجات مختارة بعناية لعملائنا.", order: 5 },
+  { key: "best-sellers", name: "الأكثر مبيعًا", enabled: true, title: "الأكثر مبيعًا", subtitle: "المنتجات اللي عملاؤنا بيثقوا فيها أكثر.", order: 6 },
+  { key: "social-media", name: "خدمات السوشيال", enabled: true, order: 7 },
+  { key: "offers", name: "العروض والفلو سيل", enabled: true, title: "عروض اليوم 🔥", subtitle: "خصومات تصل إلى 40% — العرض ينتهي قريبًا!", order: 8 },
+  { key: "why-us", name: "لماذا نحن", enabled: true, order: 9 },
+  { key: "reviews", name: "آراء العملاء", enabled: true, title: "ماذا يقول عملاؤنا؟", order: 10 },
+  { key: "faq", name: "الأسئلة الشائعة", enabled: true, order: 11 },
+  { key: "contact", name: "تواصل معنا", enabled: true, order: 12 },
 ];
 
 // ============ العروض ============

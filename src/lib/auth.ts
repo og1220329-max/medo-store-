@@ -1,4 +1,4 @@
-import { randomBytes, scryptSync, timingSafeEqual, createHmac } from "node:crypto";
+import { randomBytes, scryptSync, timingSafeEqual, createHmac, createHash } from "node:crypto";
 import { cookies } from "next/headers";
 import type { User, Role } from "@/lib/types";
 
@@ -11,6 +11,14 @@ export function hashPassword(password: string): string {
   return `${salt}:${hash}`;
 }
 
+export function sha256(input: string): string {
+  return createHash("sha256").update(input).digest("hex");
+}
+
+export function cryptoToken(bytes = 32): string {
+  return randomBytes(bytes).toString("hex");
+}
+
 export function verifyPassword(password: string, stored: string): boolean {
   const [salt, hash] = stored.split(":");
   if (!salt || !hash) return false;
@@ -20,7 +28,12 @@ export function verifyPassword(password: string, stored: string): boolean {
 }
 
 function hmacSign(payload: string): string {
-  const secret = process.env.SESSION_SECRET || "dev-secret";
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) {
+    throw new Error(
+      "SESSION_SECRET is not set. Set it in .env — without it sessions cannot be signed securely."
+    );
+  }
   return createHmac("sha256", secret).update(payload).digest("base64url");
 }
 

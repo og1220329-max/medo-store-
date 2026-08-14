@@ -32,9 +32,13 @@ export async function POST(request: Request) {
     }
 
     const store = await getStore();
-    const user = store.users.find((u) => u.email === email && u.role === "customer");
+    // يسمح أيضًا بحسابات الأدمن المخزنة (دور admin) بالدخول
+    const user = store.users.find((u) => u.email === email);
     if (!user || !user.passwordHash || !verifyPassword(password, user.passwordHash)) {
       return NextResponse.json({ message: "بيانات الدخول غير صحيحة" }, { status: 401 });
+    }
+    if (user.active === false) {
+      return NextResponse.json({ message: "هذا الحساب معطل" }, { status: 403 });
     }
 
     user.lastLoginAt = new Date().toISOString();

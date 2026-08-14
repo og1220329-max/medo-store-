@@ -21,9 +21,7 @@ export function SocialMediaCalculator() {
   const [quantity, setQuantity] = useState(1);
 
   const selected = SOCIAL_SERVICES.find((s) => s.id === selectedId)!;
-  const total = selected.minPrice * quantity * 10 % 10 === 0
-    ? selected.minPrice * quantity
-    : selected.minPrice * quantity;
+  const total = selected.minPrice * quantity;
 
   const whatsappMessage = useMemo(
     () =>

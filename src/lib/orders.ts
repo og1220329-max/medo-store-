@@ -7,14 +7,40 @@ export function generateOrderNumber(): string {
   return `MS-${rand}`;
 }
 
-export function orderTotals(items: OrderItem[], coupon?: { type: "percent" | "fixed"; value: number; minOrder?: number }) {
+export function couponUsable(coupon: {
+  active?: boolean;
+  used: number;
+  maxUses?: number;
+  startsAt?: string;
+  expiresAt?: string;
+}): boolean {
+  if (coupon.active === false) return false;
+  if (coupon.maxUses !== undefined && coupon.used >= coupon.maxUses) return false;
+  const now = Date.now();
+  if (coupon.startsAt && new Date(coupon.startsAt).getTime() > now) return false;
+  if (coupon.expiresAt && new Date(coupon.expiresAt).getTime() < now) return false;
+  return true;
+}
+
+export function orderTotals(
+  items: OrderItem[],
+  coupon?: {
+    type: "percent" | "fixed";
+    value: number;
+    minOrder?: number;
+    maxDiscount?: number;
+  }
+) {
   const subtotal = items.reduce((sum, it) => sum + it.price * it.quantity, 0);
   let discount = 0;
   if (coupon && (!coupon.minOrder || subtotal >= coupon.minOrder)) {
     discount =
       coupon.type === "percent"
-        ? Math.round((subtotal * coupon.value) / 100)
+        ? Math.round((subtotal * Math.min(coupon.value, 100)) / 100)
         : Math.min(coupon.value, subtotal);
+    if (coupon.maxDiscount !== undefined) {
+      discount = Math.min(discount, coupon.maxDiscount);
+    }
   }
   return {
     subtotal,
@@ -23,22 +49,38 @@ export function orderTotals(items: OrderItem[], coupon?: { type: "percent" | "fi
   };
 }
 
-export async function buildOrderItems(lines: CartLine[]): Promise<OrderItem[]> {
+export async function buildOrderItems(lines: CartLine[]): Promise<{
+  items: OrderItem[];
+  errors: string[];
+}> {
   const store = await getStore();
   const items: OrderItem[] = [];
+  const errors: string[] = [];
   for (const line of lines) {
     const product = store.products.find((p) => p.id === line.productId);
-    if (!product || !product.active) continue;
+    if (!product || !product.active) {
+      errors.push(`منتج غير متوفر`);
+      continue;
+    }
+    const quantity = Math.floor(Number(line.quantity));
+    if (!Number.isFinite(quantity) || quantity <= 0) {
+      errors.push(`كمية غير صالحة لمنتج «${product.name}»`);
+      continue;
+    }
+    if (!product.unlimitedStock && product.stock < quantity) {
+      errors.push(`الكمية المطلوبة من «${product.name}» غير متوفرة حاليًا`);
+      continue;
+    }
     items.push({
       productId: product.id,
       name: product.name,
       image: product.image,
       price: product.price,
-      quantity: line.quantity,
+      quantity,
       customData: line.customData || {},
     });
   }
-  return items;
+  return { items, errors };
 }
 
 export async function createOrder(input: {
@@ -55,8 +97,13 @@ export async function createOrder(input: {
       )
     : undefined;
   const ticket =
-    coupon && coupon.active && coupon.used < coupon.maxUses
-      ? { type: coupon.type, value: coupon.value, minOrder: coupon.minOrder }
+    coupon && couponUsable(coupon)
+      ? {
+          type: coupon.type,
+          value: coupon.value,
+          minOrder: coupon.minOrder,
+          maxDiscount: coupon.maxDiscount,
+        }
       : undefined;
 
   const { subtotal, discount, total } = orderTotals(input.items, ticket);
