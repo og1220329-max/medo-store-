@@ -7,46 +7,40 @@ import type { Category } from "@/lib/types";
 interface CategoryCardItem {
   id: string;
   title: string;
-  subtitle: string;
   image: string;
   href: string;
 }
 
-const DEFAULT_FEATURED_CATEGORIES: CategoryCardItem[] = [
+const CATEGORIES_DATA: CategoryCardItem[] = [
   {
-    id: "pubg-uc",
-    title: "شدات ببجي",
-    subtitle: "جميع فئات الشدات",
-    image: "/images/cat-uc-3d.jpg",
+    id: "korean-accounts",
+    title: "حسابات ببجي الكوريه",
+    image: "/images/cat-korean-acc.png",
+    href: "/products?category=pubg-kr",
+  },
+  {
+    id: "cheap-accounts",
+    title: "حسابات رخيصة",
+    image: "/images/cat-cheap-acc.png",
+    href: "/products?category=pubg-services",
+  },
+  {
+    id: "uc-we-charge",
+    title: "شدات ببجي (نشحنها لك)",
+    image: "/images/cat-uc-we-charge.png",
     href: "/categories/pubg-uc",
   },
   {
-    id: "pubg-bundles",
-    title: "باقات ببجي",
-    subtitle: "باقات مميزة بأسعار أقل",
-    image: "/images/cat-crate-3d.jpg",
-    href: "/categories/bundles",
-  },
-  {
-    id: "pubg-services",
-    title: "خدمات ببجي",
-    subtitle: "رفع تقييم - تغيير إسم وغيرها",
-    image: "/images/cat-helmet-3d.jpg",
-    href: "/categories/pubg-services",
-  },
-  {
-    id: "social-media",
-    title: "خدمات السوشيال",
-    subtitle: "متابعين ولايكات ومشاهدات",
-    image: "/images/cat-social-3d.jpg",
+    id: "popularity",
+    title: "دعم شعبية ببجي موبايل",
+    image: "/images/cat-popularity.png",
     href: "/services/social-media",
   },
   {
-    id: "digital-cards",
-    title: "منتجات رقمية",
-    subtitle: "بطاقات شحن وألعاب أخرى",
-    image: "/images/cat-giftcards-3d.jpg",
-    href: "/categories/digital",
+    id: "uc-self",
+    title: "شدات ببجي (اشحنها بنفسك)",
+    image: "/images/cat-uc-self.png",
+    href: "/categories/pubg-uc",
   },
 ];
 
@@ -58,48 +52,54 @@ export function Categories({
   socialCategory?: Category | undefined;
 }) {
   return (
-    <section className="w-full bg-[#08090d] py-6 md:py-8 border-b border-white/5">
+    <section className="w-full bg-[#08090d] py-10 md:py-14 border-b border-white/5 relative overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-4 md:px-8">
-        {/* 5-Column Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
-          {DEFAULT_FEATURED_CATEGORIES.map((item, i) => (
+        
+        {/* Section Header */}
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-xl md:text-2xl font-black text-[#DF0112] tracking-tight">
+            الأقسام :
+          </h2>
+          <p className="text-sm md:text-base font-bold text-white mt-1">
+            استعرض جميع الاقسام في متجرنا!
+          </p>
+        </div>
+
+        {/* 5 Circular Categories Row */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 items-start justify-center">
+          {CATEGORIES_DATA.map((item, i) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06, duration: 0.4 }}
+              transition={{ delay: i * 0.08, duration: 0.4 }}
+              className="flex flex-col items-center text-center group"
             >
               <Link
                 href={item.href}
-                className="group flex items-center justify-between rounded-xl bg-[#0e1017] hover:bg-[#141722] border border-white/8 hover:border-[#DF0112]/40 p-3.5 transition-all duration-300 shadow-md h-full"
+                className="flex flex-col items-center cursor-pointer group"
               >
-                {/* 3D Asset Image */}
-                <div className="relative size-16 shrink-0 rounded-lg overflow-hidden bg-black/40 border border-white/5 flex items-center justify-center">
+                {/* Circular Image Container with Glowing Hover */}
+                <div className="relative size-32 sm:size-36 md:size-40 rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#DF0112] shadow-[0_8px_25px_rgba(0,0,0,0.7)] group-hover:shadow-[0_0_30px_rgba(223,1,18,0.4)] transition-all duration-300 transform group-hover:scale-105 bg-[#0e1017]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="size-full object-cover group-hover:scale-110 transition duration-500"
+                    className="size-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
                   />
                 </div>
 
-                {/* Card Text & CTA */}
-                <div className="flex flex-col items-end text-right flex-1 pr-3">
-                  <h3 className="text-sm font-black text-white group-hover:text-white transition">
-                    {item.title}
-                  </h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
-                    {item.subtitle}
-                  </p>
-                  
-                  <span className="mt-2.5 inline-flex items-center justify-center rounded-md bg-[#161822] group-hover:bg-[#DF0112] px-3 py-1 text-[11px] font-bold text-slate-200 group-hover:text-white border border-white/5 group-hover:border-transparent transition-colors duration-200">
-                    تسوق الآن
-                  </span>
-                </div>
+                {/* Category Label Underneath */}
+                <span className="mt-3.5 text-xs sm:text-sm font-black text-white group-hover:text-[#ff3a45] transition-colors duration-200 text-center leading-relaxed">
+                  {item.title}
+                </span>
               </Link>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );
-}
+}
