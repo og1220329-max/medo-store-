@@ -13,9 +13,11 @@ export async function FeaturedProducts({
   mode?: "featured" | "best";
 }) {
   const store = await getStore();
-  const featured = store.products
+  const products = store.products
     .filter((p) => p.active && (mode === "best" ? p.bestSeller : p.featured))
     .slice(0, 8);
+
+  const isBest = mode === "best";
   const categoryMeta: Record<string, { label: string; icon: typeof Flame; href: string }> = {
     "c-pubg-uc": { label: "شدات ببجي", icon: GemIcon, href: "/categories/pubg-uc" },
     "c-social": { label: "السوشيال ميديا", icon: Users, href: "/services/social-media" },
@@ -23,12 +25,18 @@ export async function FeaturedProducts({
     "c-digital": { label: "منتجات رقمية", icon: Gift, href: "/categories/digital" },
   };
 
+  if (products.length === 0) return null;
+
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">
+    <section className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
       <SectionHeading
-        eyebrow="الأكثر طلبًا"
-        title="المنتجات الأكثر طلبًا"
-        subtitle="منتجات مختارة بعناية بناءً على طلبات عملائنا — بأسعار لا تُنافس."
+        eyebrow={isBest ? "الأكثر مبيعاً" : "الأكثر تميزاً"}
+        title={isBest ? "المنتجات الأكثر مبيعاً" : "منتجات مميزة ومختارة"}
+        subtitle={
+          isBest
+            ? "المنتجات الأكثر طلباً وثقة بين جميع عملاء المتجر."
+            : "منتجات مختارة بعناية بناءً على طلبات عملائنا — بأسعار لا تُنافس."
+        }
         action={
           <Link href="/products" className="hidden sm:block">
             <Button variant="ghost">
@@ -40,7 +48,7 @@ export async function FeaturedProducts({
       />
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {featured.map((product: Product, i) => (
+        {products.map((product: Product, i) => (
           <ProductCard key={product.id} product={product} index={i} />
         ))}
       </div>

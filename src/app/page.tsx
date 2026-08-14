@@ -31,19 +31,19 @@ export default async function HomePage() {
   return (
     <>
       {sections.get("hero")?.enabled !== false && <Hero />}
-      {sections.get("trust-bar")?.enabled !== false && <TrustBar />}
       {sections.get("categories")?.enabled !== false && (
         <Categories categories={store.categories} socialCategory={socialCategory} />
       )}
       <WeeklyBest />
-      {sections.get("banner-slider")?.enabled !== false && <BannerSlider />}
-      {sections.get("featured")?.enabled !== false ? (
+      {sections.get("featured")?.enabled !== false && (
         <FeaturedProducts mode="featured" />
-      ) : sections.get("best-sellers")?.enabled !== false ? (
-        <FeaturedProducts mode="best" />
-      ) : null}
-      {sections.get("social-media")?.enabled !== false && <SocialMediaStrip />}
+      )}
+      {sections.get("banner-slider")?.enabled !== false && <BannerSlider />}
       {sections.get("offers")?.enabled !== false && <OffersSection />}
+      {sections.get("best-sellers")?.enabled !== false && (
+        <FeaturedProducts mode="best" />
+      )}
+      {sections.get("social-media")?.enabled !== false && <SocialMediaStrip />}
       {sections.get("why-us")?.enabled !== false && <WhyUs />}
       {sections.get("reviews")?.enabled !== false && (
         <Reviews
