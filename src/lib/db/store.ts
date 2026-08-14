@@ -318,7 +318,13 @@ async function hydrate(): Promise<Store> {
   }
   const seed = buildSeed();
   cache = seed;
-  await writeSnapshot(seed);
+  // During Vercel build-time prerendering the DB tables may not exist yet,
+  // so we silently skip the write and return the in-memory seed instead.
+  try {
+    await writeSnapshot(seed);
+  } catch (e) {
+    console.warn('[store] writeSnapshot skipped (DB not ready):', (e as Error).message);
+  }
   return seed;
 }
 
