@@ -28,21 +28,34 @@ export default async function HomePage() {
   const socialCategory = store.categories.find((c) => c.slug === "social-media");
   const sections = new Map(store.homepage.map((h) => [h.key, h]));
 
+  const bestSection = sections.get("best-sellers") || sections.get("weekly-best");
+  const weeklyProducts = store.products
+    .filter((p) => p.active && (p.bestSeller || p.featured))
+    .sort((a, b) => {
+      // Prioritize TikTok and Popularity products, then best sellers
+      const isTopA = a.slug.includes("tiktok") || a.slug.includes("popularity") ? 1 : 0;
+      const isTopB = b.slug.includes("tiktok") || b.slug.includes("popularity") ? 1 : 0;
+      return isTopB - isTopA;
+    });
+
   return (
     <>
       {sections.get("hero")?.enabled !== false && <Hero />}
       {sections.get("categories")?.enabled !== false && (
         <Categories categories={store.categories} socialCategory={socialCategory} />
       )}
-      <WeeklyBest />
+      {bestSection?.enabled !== false && (
+        <WeeklyBest
+          products={weeklyProducts}
+          title={bestSection?.title || "أفضل المنتجات لهذا الأسبوع"}
+          subtitle={bestSection?.subtitle || "استعرض أكثر المنتجات طلباً من عملائنا واختر ما يناسبك بكل سهولة."}
+        />
+      )}
       {sections.get("featured")?.enabled !== false && (
         <FeaturedProducts mode="featured" />
       )}
       {sections.get("banner-slider")?.enabled !== false && <BannerSlider />}
       {sections.get("offers")?.enabled !== false && <OffersSection />}
-      {sections.get("best-sellers")?.enabled !== false && (
-        <FeaturedProducts mode="best" />
-      )}
       {sections.get("social-media")?.enabled !== false && <SocialMediaStrip />}
       {sections.get("why-us")?.enabled !== false && <WhyUs />}
       {sections.get("reviews")?.enabled !== false && (

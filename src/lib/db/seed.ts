@@ -253,6 +253,21 @@ const products: Product[] = [
     features: ["مشاهدات حقيقية", "لا يؤثر على القناة", "تقارير مفصلة"],
     requiredFields: socialField,
   }),
+  P("p-tiktok-7000", "tiktok-coins-7000", "شحن تيك توك - 7000 كوين", "شحن 7000 عملة تيك توك فورية لحسابك بأمان وسرعة فائقة لدعم البثوث وصناع المحتوى.", "c-social", "/images/product-tiktok-7000.jpg", 4200, 999, {
+    oldPrice: 5000, badge: "الأكثر طلباً", featured: true, bestSeller: true, stock: 500, deliveryTime: "من دقيقة حتى 10 دقائق",
+    features: ["شحن فوري برقم الحساب / اليوزر", "بدون كلمة مرور", "دعم البثوث والفيديوهات", "ضمان كامل"],
+    requiredFields: socialField,
+  }),
+  P("p-pubg-pop-bike", "pubg-popularity-bike", "دعم شعبية - دراجة نارية", "دعم شعبية حساب ببجي عبر إرسال دراجة نارية تكتيكية بقيمة 20,000 نقطة شعبية فورية.", "c-pubg-services", "/images/product-popularity-bike.jpg", 370, 999, {
+    oldPrice: 450, badge: "20 ألف شعبية", featured: true, bestSeller: true, stock: 400, deliveryTime: "فوري خلال 5 دقائق",
+    features: ["+20,000 نقطة شعبية", "رفع تقييم الحساب", "شحن فوري بالـ ID"],
+    requiredFields: pubgFields,
+  }),
+  P("p-tiktok-17500", "tiktok-coins-17500", "شحن تيك توك - 17500 كوين", "الباقة الذهبية الضخمة لـ 17500 كوين تيك توك — أقوى العروض بخصم خاص لأصحاب الداعمين.", "c-social", "/images/product-tiktok-17500.jpg", 9999, 999, {
+    oldPrice: 11500, badge: "باقة VIP", featured: true, bestSeller: true, stock: 200, deliveryTime: "من دقيقة حتى 15 دقيقة",
+    features: ["17,500 عملة كاملة", "أولوية شحن VIP", "ضمان تعويض 100%"],
+    requiredFields: socialField,
+  }),
   P("p-social-youtube-subs-1000", "youtube-subscribers-1000", "مشتركين يوتيوب 1000", "1000 مشترك لقناتك على يوتيوب بجودة عالية.", "c-social", "/images/social-youtube-subs.svg", 800, 999, {
     oldPrice: 1010, badge: "خصم 21%", stock: 150, deliveryTime: "خلال 3-7 أيام",
     features: ["مشتركين حقيقيين", "بدون كلمة مرور", "دعم بعد التسليم"],
