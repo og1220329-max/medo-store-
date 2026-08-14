@@ -11,6 +11,7 @@ import { Reviews } from "@/components/home/reviews";
 import { FAQSection } from "@/components/home/faq";
 import { ContactSection } from "@/components/home/contact-section";
 import { SocialMediaStrip } from "@/components/home/social-media-strip";
+import { WeeklyBest } from "@/components/home/weekly-best";
 
 export const metadata: Metadata = {
   title: "متجر الألعاب والخدمات الرقمية — شحن شدات ببجي وسوشيال ميديا",
@@ -34,6 +35,7 @@ export default async function HomePage() {
       {sections.get("categories")?.enabled !== false && (
         <Categories categories={store.categories} socialCategory={socialCategory} />
       )}
+      <WeeklyBest />
       {sections.get("banner-slider")?.enabled !== false && <BannerSlider />}
       {sections.get("featured")?.enabled !== false ? (
         <FeaturedProducts mode="featured" />
